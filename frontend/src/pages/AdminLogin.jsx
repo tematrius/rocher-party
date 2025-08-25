@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import { FiUser, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 
@@ -15,7 +16,7 @@ function AdminLogin() {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/admin/login', {
+  const response = await fetch(`${API_BASE}/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials)
