@@ -1,5 +1,8 @@
 export const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
 
+// DEBUG: Affiche la valeur de l'API utilisée
+console.log('API_BASE:', API_BASE);
+
 export async function getPublicEvent(slug) {
   const response = await fetch(`${API_BASE}/events/${slug}/public`);
   if (!response.ok) throw new Error('Failed to fetch public event');
