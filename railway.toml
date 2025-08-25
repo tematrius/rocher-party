@@ -1,20 +1,12 @@
 [build]
-# Spécifie le répertoire racine pour le build
 builder = "nixpacks"
-buildCommand = "cd backend && npm install"
 
 [deploy]
-# Spécifie le répertoire de travail
-workDir = "./backend"
-startCommand = "cd backend && npm start"
+startCommand = "npm start"
 
 [[services]]
 name = "backend"
 
 [services.build]
-# Build depuis le dossier backend
+# Build depuis le dossier backend uniquement
 context = "./backend"
-
-[services.deploy]
-# Variables d'environnement
-envVars = []
