@@ -29,13 +29,26 @@ const ImageUpload = ({ currentImage, onImageChange, placeholder = "Ajouter une i
       formData.append('image', file);
 
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${apiUrl}/api/upload/menu-image`, {
+      const uploadUrl = `${apiUrl}/api/upload/menu-image`;
+      
+      console.log('📸 Début upload vers:', uploadUrl);
+      console.log('📸 Fichier:', {
+        name: file.name,
+        size: file.size,
+        type: file.type
+      });
+
+      const response = await fetch(uploadUrl, {
         method: 'POST',
         body: formData,
       });
 
+      console.log('📸 Réponse statut:', response.status);
+
       if (!response.ok) {
-        throw new Error('Erreur lors de l\'upload');
+        const errorText = await response.text();
+        console.error('📸 Erreur réponse:', errorText);
+        throw new Error(`Erreur lors de l'upload: ${response.status}`);
       }
 
       const data = await response.json();

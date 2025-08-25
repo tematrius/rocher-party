@@ -36,14 +36,30 @@ const upload = multer({
 });
 
 // Route pour upload d'une image de menu
-router.post('/menu-image', upload.single('image'), (req, res) => {
+router.post('/menu-image', (req, res, next) => {
+  console.log('📸 Tentative d\'upload d\'image');
+  console.log('Headers:', req.headers);
+  next();
+}, upload.single('image'), (req, res) => {
   try {
+    console.log('📸 Fichier reçu:', req.file ? 'OUI' : 'NON');
+    
     if (!req.file) {
+      console.log('❌ Aucun fichier fourni');
       return res.status(400).json({ error: 'Aucune image fournie' });
     }
 
+    console.log('📸 Détails fichier:', {
+      originalname: req.file.originalname,
+      filename: req.file.filename,
+      size: req.file.size,
+      mimetype: req.file.mimetype
+    });
+
     // Retourner l'URL de l'image uploadée
     const imageUrl = `/uploads/menu-images/${req.file.filename}`;
+    
+    console.log('✅ Upload réussi:', imageUrl);
     
     res.json({
       success: true,
@@ -51,7 +67,7 @@ router.post('/menu-image', upload.single('image'), (req, res) => {
       filename: req.file.filename
     });
   } catch (error) {
-    console.error('Erreur upload image:', error);
+    console.error('❌ Erreur upload image:', error);
     res.status(500).json({ error: 'Erreur lors de l\'upload de l\'image' });
   }
 });
