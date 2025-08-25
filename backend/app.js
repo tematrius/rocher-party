@@ -17,7 +17,8 @@ app.use(cors({
     "http://localhost:3000", 
     "http://localhost:3001", 
     "http://192.168.137.1:3000",
-    /^http:\/\/192\.168\.137\.\d+:3000$/
+    /^http:\/\/192\.168\.137\.\d+:3000$/,
+    "https://rocher-party.netlify.app"
   ],
   credentials: true
 }));
