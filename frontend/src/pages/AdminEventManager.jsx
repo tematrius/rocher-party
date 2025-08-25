@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE } from '../services/api';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { 
   FiArrowLeft, 
@@ -33,7 +34,7 @@ function AdminEventManager() {
 
   const fetchEvent = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/events/${slug}`, {
+  const response = await fetch(`${API_BASE}/admin/events/${slug}`, {
         headers: { 'Authorization': `Bearer ${adminToken}` }
       });
 
@@ -56,7 +57,7 @@ function AdminEventManager() {
   const toggleStepCompletion = async (stepIndex, currentStatus) => {
     setUpdating(stepIndex);
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/events/${slug}/program/${stepIndex}`, {
+  const response = await fetch(`${API_BASE}/admin/events/${slug}/program/${stepIndex}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

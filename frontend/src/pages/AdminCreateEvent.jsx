@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../services/api';
 import { useNavigate, Link } from 'react-router-dom';
 import { 
   FiArrowLeft, 
@@ -150,7 +151,7 @@ function AdminCreateEvent() {
 
     try {
       console.log('📤 Envoi des données:', eventData);
-      const response = await fetch('http://localhost:5000/api/admin/events', {
+  const response = await fetch(`${API_BASE}/admin/events`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

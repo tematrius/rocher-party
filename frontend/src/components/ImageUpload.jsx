@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../services/api';
 import { FiUpload, FiTrash2, FiImage } from 'react-icons/fi';
 import './ImageUpload.css';
 
@@ -28,8 +29,7 @@ const ImageUpload = ({ currentImage, onImageChange, placeholder = "Ajouter une i
       const formData = new FormData();
       formData.append('image', file);
 
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const uploadUrl = `${apiUrl}/api/upload/menu-image`;
+  const uploadUrl = `${API_BASE}/upload/menu-image`;
       
       console.log('📸 Début upload vers:', uploadUrl);
       console.log('📸 Fichier:', {
@@ -54,7 +54,7 @@ const ImageUpload = ({ currentImage, onImageChange, placeholder = "Ajouter une i
       const data = await response.json();
       
       if (data.success) {
-        const imageUrl = `${apiUrl}${data.imageUrl}`;
+  const imageUrl = `${API_BASE.replace('/api','')}${data.imageUrl}`;
         console.log('Image uploadée avec succès:', imageUrl);
         setPreviewImage(imageUrl);
         onImageChange(imageUrl);
@@ -74,8 +74,7 @@ const ImageUpload = ({ currentImage, onImageChange, placeholder = "Ajouter une i
     const filename = previewImage.split('/').pop();
     
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const response = await fetch(`${apiUrl}/api/upload/menu-image/${filename}`, {
+  const response = await fetch(`${API_BASE}/upload/menu-image/${filename}`, {
         method: 'DELETE',
       });
 

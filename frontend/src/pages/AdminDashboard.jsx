@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE } from '../services/api';
 import { useNavigate, Link } from 'react-router-dom';
 import { 
   FiCalendar, 
@@ -34,7 +35,7 @@ function AdminDashboard() {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/admin/events', {
+  const response = await fetch(`${API_BASE}/admin/events`, {
         headers: { 'Authorization': `Bearer ${adminToken}` }
       });
 
@@ -62,7 +63,7 @@ function AdminDashboard() {
 
   const togglePublish = async (slug, currentStatus) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/events/${slug}/publish`, {
+  const response = await fetch(`${API_BASE}/admin/events/${slug}/publish`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -88,7 +89,7 @@ function AdminDashboard() {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/events/${slug}`, {
+  const response = await fetch(`${API_BASE}/admin/events/${slug}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

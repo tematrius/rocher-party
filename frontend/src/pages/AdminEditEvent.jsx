@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE } from '../services/api';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { 
   FiArrowLeft, 
@@ -41,7 +42,7 @@ function AdminEditEvent() {
     const fetchEvent = async () => {
       try {
         const adminToken = localStorage.getItem('adminToken');
-        const response = await fetch(`http://localhost:5000/api/admin/events/${slug}`, {
+  const response = await fetch(`${API_BASE}/admin/events/${slug}`, {
           headers: {
             'Authorization': `Bearer ${adminToken}`
           }
@@ -173,7 +174,7 @@ function AdminEditEvent() {
       const adminToken = localStorage.getItem('adminToken');
       console.log('Données envoyées:', eventData);
 
-      const response = await fetch(`http://localhost:5000/api/admin/events/${slug}`, {
+  const response = await fetch(`${API_BASE}/admin/events/${slug}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

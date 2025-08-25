@@ -8,7 +8,7 @@ class SocketService {
 
   connect() {
     if (!this.socket) {
-      const socketUrl = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
+  const socketUrl = API_BASE;
       this.socket = io(socketUrl, {
         transports: ['websocket', 'polling']
       });
