@@ -1,4 +1,4 @@
-export const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
+export const API_BASE = import.meta.env.VITE_API_BASE || 'https://rocher-party-production.up.railway.app/api';
 
 // DEBUG: Affiche la valeur de l'API utilisée
 console.log('API_BASE:', API_BASE);
