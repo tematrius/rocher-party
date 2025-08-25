@@ -40,3 +40,7 @@ app.use('/api', adminRouter);
 app.use('/api/upload', uploadRouter);
 
 export default app;
+// Route racine pour vérifier le statut de l'API
+app.get('/', (req, res) => {
+  res.send('Rocher Party API is running');
+});
