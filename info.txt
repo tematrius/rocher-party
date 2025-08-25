@@ -1,0 +1,2 @@
+mdp mongo db : 7LIupTCVUjoKxU4T
+url : mongodb+srv://nolymashika21:7LIupTCVUjoKxU4T@cluster0.vropape.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
