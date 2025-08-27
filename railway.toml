@@ -1,0 +1,12 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "npm start"
+
+[[services]]
+name = "backend"
+
+[services.build]
+# Build depuis le dossier backend uniquement
+context = "./backend"

@@ -6,6 +6,14 @@ import socketService from '../services/socket';
 import Header from '../components/Header';
 import LockedMessage from '../components/LockedMessage';
 
+// DEBUG: Vérifie si API_BASE est accessible
+try {
+  // eslint-disable-next-line no-undef
+  console.log('EventProgram API_BASE:', API_BASE);
+} catch (e) {
+  console.error('EventProgram: API_BASE is not defined', e);
+}
+
 function EventProgram() {
   const { slug } = useParams();
   const [publicEvent, setPublicEvent] = useState(null);

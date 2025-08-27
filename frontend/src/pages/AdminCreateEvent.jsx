@@ -53,17 +53,25 @@ function AdminCreateEvent() {
   };
 
   const handleInputChange = (field, value) => {
-    setEventData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-    
-    // Auto-générer le slug quand le nom change
-    if (field === 'name') {
+    if (field === 'startAt') {
+      // Convertit la date locale en ISO UTC
+      const localDate = new Date(value);
       setEventData(prev => ({
         ...prev,
-        slug: generateSlug(value)
+        startAt: localDate.toISOString()
       }));
+    } else {
+      setEventData(prev => ({
+        ...prev,
+        [field]: value
+      }));
+      // Auto-générer le slug quand le nom change
+      if (field === 'name') {
+        setEventData(prev => ({
+          ...prev,
+          slug: generateSlug(value)
+        }));
+      }
     }
   };
 
