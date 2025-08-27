@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { FiList, FiCheckCircle, FiClock, FiWifi, FiWifiOff } from 'react-icons/fi';
-import { getPublicEvent, getFullEvent } from '../services/api';
+import { getPublicEvent, getFullEvent, API_BASE } from '../services/api';
 import socketService from '../services/socket';
 import Header from '../components/Header';
 import LockedMessage from '../components/LockedMessage';
