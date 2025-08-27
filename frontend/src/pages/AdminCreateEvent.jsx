@@ -53,25 +53,16 @@ function AdminCreateEvent() {
   };
 
   const handleInputChange = (field, value) => {
-    if (field === 'startAt') {
-      // Convertit la date locale en ISO UTC
-      const localDate = new Date(value);
+    setEventData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+    // Auto-générer le slug quand le nom change
+    if (field === 'name') {
       setEventData(prev => ({
         ...prev,
-        startAt: localDate.toISOString()
+        slug: generateSlug(value)
       }));
-    } else {
-      setEventData(prev => ({
-        ...prev,
-        [field]: value
-      }));
-      // Auto-générer le slug quand le nom change
-      if (field === 'name') {
-        setEventData(prev => ({
-          ...prev,
-          slug: generateSlug(value)
-        }));
-      }
     }
   };
 
@@ -157,15 +148,22 @@ function AdminCreateEvent() {
       return;
     }
 
+    // Conversion des dates en UTC ISO avant envoi
+    const eventToSend = {
+      ...eventData,
+      startAt: eventData.startAt ? new Date(eventData.startAt).toISOString() : '',
+      endAt: eventData.endAt ? new Date(eventData.endAt).toISOString() : ''
+    };
+
     try {
-      console.log('📤 Envoi des données:', eventData);
-  const response = await fetch(`${API_BASE}/admin/events`, {
+      console.log('📤 Envoi des données:', eventToSend);
+      const response = await fetch(`${API_BASE}/admin/events`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${adminToken}`
         },
-        body: JSON.stringify(eventData)
+        body: JSON.stringify(eventToSend)
       });
 
       const data = await response.json();
