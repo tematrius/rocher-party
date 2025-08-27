@@ -9,7 +9,8 @@ class SocketService {
 
   connect() {
     if (!this.socket) {
-  const socketUrl = API_BASE;
+      // Utilise l'URL sans /api pour Socket.io
+      const socketUrl = API_BASE.replace('/api', '');
       this.socket = io(socketUrl, {
         transports: ['websocket', 'polling']
       });
